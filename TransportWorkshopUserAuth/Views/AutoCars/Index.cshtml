@@ -1,0 +1,170 @@
+﻿@*@model IEnumerable<TransportWorkshopUserAuth.Models.AutoCar>*@
+@model PageViewModel<TransportWorkshopUserAuth.Models.AutoCar>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Автомобили</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Поиск по Водителю:<input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            По Топливу:<input type="text" name="SearchString2" value="@ViewData["currentFilter2"]" />
+            По Машине:<input type="text" name="SearchString3" value="@ViewData["currentFilter3"]" />
+            <input type="submit" value="Поиск" class="btn btn-light" />
+            @*<a asp-action="Index">Назад к полному списку</a>*@
+            <a class="btn btn-info" asp-action="Index">К списку</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["NameSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Машина
+                </a>
+                @*@Html.DisplayNameFor(model => model.NameAuto)*@
+            </th>
+            <th>
+                Номер
+                @*@Html.DisplayNameFor(model => model.Number)*@
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["MileageSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Пробег
+                </a>
+                @*@Html.DisplayNameFor(model => model.Mileage)*@
+            </th>
+            <th>
+                Тип топлива
+                @*@Html.DisplayNameFor(model => model.TypeFuel)*@
+            </th>
+            <th>
+                Норма топлива
+                @*@Html.DisplayNameFor(model => model.NormaFuel)*@
+            </th>
+            <th>
+                Прицепы
+                @*@Html.DisplayNameFor(model => model.Trailer)*@
+            </th>
+            <th>
+                Водитель
+                @*@Html.DisplayNameFor(model => model.Driver)*@
+            </th>
+            <th>
+                Тип Авто
+                @*@Html.DisplayNameFor(model => model.TypeAuto)*@
+            </th>
+            <th>
+                Покрышки
+                @*@Html.DisplayNameFor(model => model.Tire)*@
+            </th>
+            <th>
+                Формула Вредности
+                @*@Html.DisplayNameFor(model => model.Harmfulness)*@
+            </th>
+            <th>
+                Навигация
+                @*@Html.DisplayNameFor(model => model.Navigation)*@
+            </th>
+            <th>
+                Инжектр
+                @*@Html.DisplayNameFor(model => model.Injector)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAuto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mileage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeFuel.Fuel)
+                </td>
+                <td>
+                    Лин @Html.DisplayFor(modelItem => item.NormaFuel.Linear)
+                    Лет @Html.DisplayFor(modelItem => item.NormaFuel.Summer)
+                    Зим @Html.DisplayFor(modelItem => item.NormaFuel.Winter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trailer.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Driver.FirsLastMidName)
+                    Кат. @Html.DisplayFor(modelItem => item.Driver.Category)
+                    Права @Html.DisplayFor(modelItem => item.Driver.RightsNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeAuto.NameType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tire.Name)
+                    Бренд @Html.DisplayFor(modelItem => item.Tire.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Harmfulness)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Navigation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Injector)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.AutoCarId">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.AutoCarId">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.AutoCarId">Delete</a>*@
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.AutoCarId">Изменить</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.AutoCarId">Детали</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.AutoCarId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+   asp-route-currentFilter3="@ViewData["CurrentFilter3"]"
+   class="btn btn-success @prevDisabled">
+    Предыдущий
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentFilter2="@ViewData["CurrentFilter2"]"
+   asp-route-currentFilter3="@ViewData["CurrentFilter3"]"
+   class="btn btn-warning @nextDisabled">
+    Следующий
+</a>
+@if (Model.PageIndex != 0)
+{
+    <br />
+    <b>Страница @Model.PageIndex из @Model.TotalPages</b>
+}

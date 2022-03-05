@@ -1,0 +1,107 @@
+﻿@*@model IEnumerable<TransportWorkshopUserAuth.Models.Balance>*@
+@model PageViewModel<TransportWorkshopUserAuth.Models.Balance>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Остатки</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Поиск по Машине:<input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-light" />
+            @*<a asp-action="Index">Назад к полному списку</a>*@
+            <a class="btn btn-info" asp-action="Index">К полному списку</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["DateSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Дата
+                </a>
+                @*@Html.DisplayNameFor(model => model.Date)*@
+            </th>
+            <th>
+                Машины
+                @*@Html.DisplayNameFor(model => model.AutoCar)*@
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["LeftoverSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Остаток
+                </a>
+                @*@Html.DisplayNameFor(model => model.Leftovers)*@
+            </th>
+            <th>
+                СУГ
+                @*@Html.DisplayNameFor(model => model.Sug)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutoCar.NameAuto)<br />
+                    Номер @Html.DisplayFor(modelItem => item.AutoCar.Number)<br />
+                    Пробег @Html.DisplayFor(modelItem => item.AutoCar.Mileage)
+                    @*@Html.DisplayFor(modelItem => item.AutoCar.TypeFuelId)*@
+                    @* @Html.DisplayFor(modelItem => item.AutoCar.DriverId)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Leftovers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sug)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.BalanceId">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.BalanceId">Details</a>
+                           <a asp-action="Delete" asp-route-id="@item.BalanceId">Delete</a>*@
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.BalanceId">Изменить</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BalanceId">Детали</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BalanceId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-success @prevDisabled">
+    Предыдущий
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-warning @nextDisabled">
+    Следующий
+</a>
+@if (Model.PageIndex != 0)
+{
+    <br />
+    <b>Страница @Model.PageIndex из @Model.TotalPages</b>
+}

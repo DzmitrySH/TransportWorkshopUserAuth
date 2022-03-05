@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TransportWorkshopUserAuth.Models.Trailer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Прицепы</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+    <a class="btn btn-info" asp-action="Index">К полному списку</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Massa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tire)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Massa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tire.Name)
+                @Html.DisplayFor(modelItem => item.Tire.Brand)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.TrailerId">Edit</a>
+        <a asp-action="Details" asp-route-id="@item.TrailerId">Details</a>
+        <a asp-action="Delete" asp-route-id="@item.TrailerId">Delete</a>*@
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.TrailerId">Изменить</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.TrailerId">Детали</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TrailerId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

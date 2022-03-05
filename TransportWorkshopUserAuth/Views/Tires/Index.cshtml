@@ -1,0 +1,94 @@
+﻿@*@model IEnumerable<TransportWorkshopUserAuth.Models.Tire>*@
+@model PageViewModel<TransportWorkshopUserAuth.Models.Tire>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Покрышки</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+    <a class="btn btn-info" asp-action="Index">К полному списку</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Номинал
+                @*@Html.DisplayNameFor(model => model.Name)*@
+            </th>
+            <th>
+                Бренд
+                @*@Html.DisplayNameFor(model => model.Brand)*@
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["DateSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Дата
+                </a>
+                @*@Html.DisplayNameFor(model => model.Date)*@
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["RunSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Начало пробега
+                </a>
+                @*@Html.DisplayNameFor(model => model.RunStart)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RunStart)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.TireId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TireId">Details</a> |
+                         <a asp-action="Delete" asp-route-id="@item.TireId">Delete</a>*@
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.TireId">Изменить</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.TireId">Детали</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TireId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-success @prevDisabled">
+    Предыдущий
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-warning @nextDisabled">
+    Следующий
+</a>
+@if (Model.PageIndex != 0)
+{
+    <br />
+    <b>Страница @Model.PageIndex из @Model.TotalPages</b>
+}

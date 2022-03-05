@@ -1,0 +1,62 @@
+﻿@model TransportWorkshopUserAuth.Models.Device
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Добавить</h1>
+
+<h4>Устройство</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Namedevice" class="control-label"></label>
+                <input asp-for="Namedevice" class="form-control" />
+                <span asp-validation-for="Namedevice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeFuelId" class="control-label"></label>
+                <select asp-for="TypeFuelId" class="form-control" asp-items="ViewBag.TypeFuelId">
+                    <option value="">-- Выберите Топливо --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SumerTime" class="control-label"></label>
+                <input asp-for="SumerTime" class="form-control" />
+                <span asp-validation-for="SumerTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WinterTimeId" class="control-label"></label>
+                <select asp-for="WinterTimeId" class="form-control" asp-items="ViewBag.WinterTimeId">
+                    <option value="">-- Выберите Зимний Период --</option>
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Harmfulness" /> @Html.DisplayNameFor(model => model.Harmfulness)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TireId" class="control-label"></label>
+                <select asp-for="TireId" class="form-control" asp-items="ViewBag.TireId">
+                    <option value="">-- Выберите Покрышки --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @*<a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

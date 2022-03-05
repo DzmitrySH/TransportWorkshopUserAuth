@@ -1,0 +1,104 @@
+﻿@model TransportWorkshopUserAuth.Models.AutoCar
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Изменить</h1>
+
+<h4>Автомобили</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AutoCarId" />
+            <div class="form-group">
+                <label asp-for="NameAuto" class="control-label"></label>
+                <input asp-for="NameAuto" class="form-control" />
+                <span asp-validation-for="NameAuto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage" class="control-label"></label>
+                <input asp-for="Mileage" class="form-control" />
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="TypeFuelId" class="control-label"></label>
+                    <select asp-for="TypeFuelId" class="form-control" asp-items="ViewBag.TypeFuelId">
+                        <option value="">-- Выберите Топливо --</option>
+                    </select>
+                    <span asp-validation-for="TypeFuelId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="NormaFuelId" class="control-label"></label>
+                    <select asp-for="NormaFuelId" class="form-control" asp-items="ViewBag.NormaFuelId">
+                        <option value="">-- Выберите Норму --</option>
+                    </select>
+                    <span asp-validation-for="NormaFuelId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="TrailerId" class="control-label"></label>
+                    <select asp-for="TrailerId" class="form-control" asp-items="ViewBag.TrailerId">
+                        <option value="">-- Выберите Прицеп --</option>
+                    </select>
+                    <span asp-validation-for="TrailerId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="DriverId" class="control-label"></label>
+                    <select asp-for="DriverId" class="form-control" asp-items="ViewBag.DriverId">
+                        <option value="">-- Водитель Авто --</option>
+                    </select>
+                    <span asp-validation-for="DriverId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="TypeAutoId" class="control-label"></label>
+                    <select asp-for="TypeAutoId" class="form-control" asp-items="ViewBag.TypeAutoId">
+                        <option value="">-- Выберите тип Авто --</option>
+                    </select>
+                    <span asp-validation-for="TypeAutoId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="TireId" class="control-label"></label>
+                    <select asp-for="TireId" class="form-control" asp-items="ViewBag.TireId">
+                        <option value="">-- Выберите тип покрыше --</option>
+                    </select>
+                    <span asp-validation-for="TireId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Harmfulness" class="control-label"></label>
+                <input asp-for="Harmfulness" class="form-control" />
+                <span asp-validation-for="Harmfulness" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Navigation" /> @Html.DisplayNameFor(model => model.Navigation)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Injector" /> @Html.DisplayNameFor(model => model.Injector)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @*<a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,44 @@
+﻿@model TransportWorkshopUserAuth.Models.NormaFuel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Добавить</h1>
+
+<h4>Норму топлива</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Linear" class="control-label"></label>
+                <input asp-for="Linear" class="form-control" />
+                <span asp-validation-for="Linear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summer" class="control-label"></label>
+                <input asp-for="Summer" class="form-control" />
+                <span asp-validation-for="Summer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Winter" class="control-label"></label>
+                <input asp-for="Winter" class="form-control" />
+                <span asp-validation-for="Winter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @*<a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

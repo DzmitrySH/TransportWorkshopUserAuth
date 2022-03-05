@@ -1,0 +1,47 @@
+﻿@model TransportWorkshopUserAuth.Models.Maintenance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Изменить</h1>
+
+<h4>ТО</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaintenanceId" />
+            <div class="form-group">
+                <label asp-for="TypeTO" class="control-label"></label>
+                <input asp-for="TypeTO" class="form-control" />
+                <span asp-validation-for="TypeTO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AutoCarId" class="control-label"></label>
+                <select asp-for="AutoCarId" class="form-control" asp-items="ViewBag.AutoCarId">
+                    <option value="">-- Выберите Авто --</option>
+                </select>
+                <span asp-validation-for="AutoCarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTO" class="control-label"></label>
+                <input asp-for="DateTO" class="form-control" />
+                <span asp-validation-for="DateTO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @*<a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

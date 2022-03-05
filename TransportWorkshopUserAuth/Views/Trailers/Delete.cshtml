@@ -1,0 +1,40 @@
+﻿@model TransportWorkshopUserAuth.Models.Trailer
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удалить</h1>
+
+<h3>Вы действительно хотите удалить?</h3>
+<div>
+    <h4>Прицеп</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Massa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Massa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tire)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tire.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TrailerId" />
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+        @*<a asp-action="Index">Back to List</a>*@
+        <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+    </form>
+</div>

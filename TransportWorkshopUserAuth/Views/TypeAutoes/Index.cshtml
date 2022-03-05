@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TransportWorkshopUserAuth.Models.TypeAuto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Тип Автомобиля</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+    <a class="btn btn-info" asp-action="Index">К полному списку</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameType)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.TypeAutoId">Edit</a>
+                 <a asp-action="Details" asp-route-id="@item.TypeAutoId">Details</a>
+                 <a asp-action="Delete" asp-route-id="@item.TypeAutoId">Delete</a>*@
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.TypeAutoId">Изменить</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.TypeAutoId">Детали</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TypeAutoId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,96 @@
+﻿@*@model IEnumerable<TransportWorkshopUserAuth.Models.Driver>*@
+@model PageViewModel<TransportWorkshopUserAuth.Models.Driver>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Водители</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Поиск по Ф.И.О.: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-light" />
+            @*<a asp-action="Index">Назад к полному списку</a>*@
+            <a class="btn btn-info" asp-action="Index">К полному списку</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["NameSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Ф.И.О.
+                </a>
+                @*@Html.DisplayNameFor(model => model.FirsLastMidName)*@
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CategorySortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Категория
+                </a>
+                @*@Html.DisplayNameFor(model => model.Category)*@
+            </th>
+            <th>
+                Права №
+                @*@Html.DisplayNameFor(model => model.RightsNumber)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirsLastMidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RightsNumber)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.DriverId">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.DriverId">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.DriverId">Delete</a>*@
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.DriverId">Изменить</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.DriverId">Детали</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.DriverId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-success @prevDisabled">
+    Предыдущий
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-warning @nextDisabled">
+    Следующий
+</a>
+@if (Model.PageIndex != 0)
+{
+    <br />
+    <b>Страница @Model.PageIndex из @Model.TotalPages</b>
+}

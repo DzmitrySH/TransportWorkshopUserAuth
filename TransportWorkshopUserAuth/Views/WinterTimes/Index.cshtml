@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TransportWorkshopUserAuth.Models.WinterTime>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Зимнее Время</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a class="btn btn-primary" asp-action="Create">Добавить</a>
+    <a class="btn btn-info" asp-action="Index">К полному списку</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WinterNorma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperature)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinterNorma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperature)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.WinterTimeId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.WinterTimeId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.WinterTimeId">Delete</a>*@
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.WinterTimeId">Изменить</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.WinterTimeId">Детали</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.WinterTimeId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

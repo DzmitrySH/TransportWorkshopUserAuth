@@ -1,0 +1,48 @@
+﻿@model TransportWorkshopUserAuth.Models.Balance
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Детали</h1>
+
+<div>
+    <h4>Остаток</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AutoCar)
+        </dt>
+        <dd class="col-sm-10">
+            <p>Тип @Html.DisplayFor(model => model.AutoCar.NameAuto)</p>
+            <p>Номер @Html.DisplayFor(model => model.AutoCar.Number)</p>
+            <p>Пробег @Html.DisplayFor(model => model.AutoCar.Mileage)</p>
+            @*@Html.DisplayFor(model => model.AutoCar.TypeFuelId)*@
+            @*@Html.DisplayFor(model => model.AutoCar.DriverId)*@
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Leftovers)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Leftovers)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sug)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sug)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.BalanceId">Edit</a>
+        <a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.BalanceId">Изменить</a>
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>

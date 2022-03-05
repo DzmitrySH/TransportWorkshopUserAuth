@@ -1,0 +1,44 @@
+﻿@model TransportWorkshopUserAuth.Models.Tire
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Детали</h1>
+
+<div>
+    <h4>Покрышка</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RunStart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RunStart)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.TireId">Edit</a> |
+        <a asp-action="Index">Back to List</a>*@
+    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.TireId">Изменить</a>
+    <a class="btn btn-success" asp-action="Index">Назад к списку</a>
+</div>
